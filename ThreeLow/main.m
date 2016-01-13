@@ -21,12 +21,17 @@ int main(int argc, const char * argv[]) {
     NSUInteger playerOneScore = 0;
     NSUInteger playerTwoScore = 0;
     
-    for (int playerCounter = 1; playerCounter < 3; playerCounter) {
+    for (int playerCounter = 1; playerCounter < 3; playerCounter++) {
     
         NSString *inputString = @"roll";
         NSString *whileCheck = @"notcomplete";
-        NSString *initialString = [newList inputForPrompt:@"\nRoll the dice (you will get 3 attempts) (y/n)?"];
-    
+        NSString *initialString;
+        
+        if (playerCounter == 1) {
+        initialString = [newList inputForPrompt:@"\nRoll the dice Player 1 (you will get 3 attempts) (y/n)?"];
+        } else {
+        initialString = [newList inputForPrompt:@"\nRoll the dice Player 2 (you will get 3 attempts) (y/n)?"];
+        }
             if ([initialString isEqualToString:@"n"]) {
             NSLog(@"Thank you");
             EXIT_SUCCESS;
@@ -36,7 +41,10 @@ int main(int argc, const char * argv[]) {
             
         while ([whileCheck isEqualToString:@"notcomplete"] && (attempt < 3)) {
             
-            
+            if (attempt == 0) {
+                [gamePlay diceValueArrayCreation];
+                [gamePlay diceStatusResetUpdate];
+            }
             
             [gamePlay diceValueArrayCreation];
             
@@ -46,9 +54,7 @@ int main(int argc, const char * argv[]) {
                 NSString *selectedDices = [newList inputForPrompt:@"\nPlease mention values to be saved separated by space (a, b, c, d, e)"];
                 NSMutableArray *userChoice = [[NSMutableArray alloc] init];
                 userChoice = [selectedDices componentsSeparatedByString:@" "];
-                //NSLog(@"%@", userChoice);
                 NSUInteger length = [userChoice count];
-                //NSLog(@"%lu", (unsigned long)length);
                 
                 for (int i = 0; i < length; i++) {
                     
@@ -82,17 +88,18 @@ int main(int argc, const char * argv[]) {
             whileCheck = [gamePlay statusCheck];
             
             }
+            if (playerCounter == 1) {
+                playerOneScore = [gamePlay totalScorePlayer];
+            } else if (playerCounter == 2) {
+                playerTwoScore = [gamePlay totalScorePlayer];
+            }
         }
-        if (playerCounter == 1) {
-            playerOneScore = [gamePlay totalScorePlayer];
-        } else if (playerCounter == 2) {
-            playerTwoScore = [gamePlay totalScorePlayer];
-        }
+        
 }
-    if (playerOneScore < playerTwoScore) {
+    if (playerOneScore > playerTwoScore) {
         NSLog(@"Player Two Won !! \nPlayer One Score %lu\nPlayer Two Score %lu", (unsigned long)playerOneScore, (unsigned long)playerTwoScore);
     } else if (playerOneScore > playerTwoScore) {
-        NSLog(@"Player Two Won !! \nPlayer One Score %lu\nPlayer Two Score %lu", (unsigned long)playerOneScore, (unsigned long)playerTwoScore);
+        NSLog(@"Player One Won !! \nPlayer One Score %lu\nPlayer Two Score %lu", (unsigned long)playerOneScore, (unsigned long)playerTwoScore);
     } else {
         NSLog(@"You both are winners :) !! \nPlayer One Score %lu\nPlayer Two Score %lu", (unsigned long)playerOneScore, (unsigned long)playerTwoScore);
     }
