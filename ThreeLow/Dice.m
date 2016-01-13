@@ -10,9 +10,31 @@
 
 @implementation Dice
 
-
--(int)diceValue {
-    return arc4random_uniform(6) + 1;
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _diceStatus = @"no";
+    }
+    return self;
 }
+
+-(void)diceValueRandomiser {
+    self.diceCurrentValue = arc4random_uniform(6) + 1;
+    
+//    if ([self.diceStatus isEqualToString:@"held"]) {
+//        NSLog(@"This value has been held");
+//    } else {
+//        self.diceCurrentValue = arc4random_uniform(6) + 1;
+//    }
+////    return self.diceCurrentValue;
+}
+
+-(void)diceHold {
+    self.diceStatus = @"held";
+}
+
+
+
 
 @end
