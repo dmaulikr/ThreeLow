@@ -13,13 +13,14 @@
 
 
 int main(int argc, const char * argv[]) {
-    NSLog(@"Roll the dice");
+    NSLog(@"Roll the dice (you will get 3 attempts)");
     
     InputCollector *newList = [[InputCollector alloc] init];
     GameController *gamePlay = [[GameController alloc] init];
-//    Dice *diceInstance = [[Dice alloc] init];
+   Dice *dice = [[Dice alloc] init];
     
-        NSString *inputString = @"r";
+        NSString *inputString = @"roll";
+        NSString *whileCheck = @"notcomplete";
         NSString *initialString = [newList inputForPrompt:@"\nRoll the dice (y/n)?"];
     
             if ([initialString isEqualToString:@"n"]) {
@@ -27,29 +28,20 @@ int main(int argc, const char * argv[]) {
             EXIT_SUCCESS;
         } else if ([initialString isEqualToString:@"y"]) {
         
-        while ([inputString isEqualToString:@"r"]) {
+        while ([whileCheck isEqualToString:@"notcomplete"]) {
+            
             
             [gamePlay diceValueArrayCreation];
             
-        inputString = [newList inputForPrompt:@"\nChoose dice values to save or roll again without saving any (s/r)?"];
+        inputString = [newList inputForPrompt:@"\nChoose save dice values (save)\nRoll again (roll)\nReset all (reset)?"];
             
-            if ([inputString isEqualToString:@"s"]) {
+            if ([inputString isEqualToString:@"save"]) {
                 NSString *selectedDices = [newList inputForPrompt:@"\nPlease mention values to be saved separated by space (a, b, c, d, e)"];
                 NSMutableArray *userChoice = [[NSMutableArray alloc] init];
                 userChoice = [selectedDices componentsSeparatedByString:@" "];
                 NSLog(@"%@", userChoice);
                 NSUInteger length = [userChoice count];
                  NSLog(@"%lu", (unsigned long)length);
-                
-                //[gamePlay diceValueDisplay];
-                
-                Dice *dice = [[Dice alloc] init];
-                
-                for (int i =0; i<5;i++){
-                dice = [gamePlay.diceValuesArray objectAtIndex:i];
-                NSLog(@"%@ %lu", dice.diceStatus, (unsigned long)dice.diceCurrentValue);
-                }
-                
                 
                 for (int i = 0; i < length; i++) {
                     
@@ -68,19 +60,20 @@ int main(int argc, const char * argv[]) {
                     else if([userChoice[i] isEqualToString:@"e"]) {
                         dice = [gamePlay.diceValuesArray objectAtIndex:4];
                         [dice diceHold];}
-                    
+                    }
+                [gamePlay printCurrentDiceArray];
                 }
-                for (int i =0; i<5;i++){
-                    dice = [gamePlay.diceValuesArray objectAtIndex:i];
-                    NSLog(@"%@ %lu", dice.diceStatus, (unsigned long)dice.diceCurrentValue);
+            else if ([inputString isEqualToString:@"roll"]) {
+            
+            [gamePlay diceValueArrayUpdate];
+            [gamePlay printCurrentDiceArray];
                 }
-                int leftOut = 5 - length;
-                [gamePlay diceValueArrayUpdate:leftOut];
-                for (int i =0; i<5;i++){
-                    dice = [gamePlay.diceValuesArray objectAtIndex:i];
-                    NSLog(@"%@ %lu", dice.diceStatus, (unsigned long)dice.diceCurrentValue);
+            else if ([inputString isEqualToString:@"reset"]) {
+            [gamePlay diceStatusResetUpdate];
+            [gamePlay printCurrentDiceArray];
                 }
-            }
+            whileCheck = [gamePlay statusCheck];
+            
             }
         }
     return 0;

@@ -16,68 +16,98 @@
     self = [super init];
     if (self) {
         _diceValuesArray = [[NSMutableArray alloc] init];
+        //[self diceValueArrayCreation];
     }
     return self;
 }
 
 -(void)diceValueArrayCreation {
     
-    
     for (int i=0; i <5; i++) {
         
         Dice *dice = [[Dice alloc] init];
-        
         [dice diceValueRandomiser];
-        
-        NSLog(@"%lu", dice.diceCurrentValue);
-        
+        //NSLog(@"%lu", dice.diceCurrentValue);
         [self.diceValuesArray addObject:dice];
-        
-        //NSLog(@"%@", @(dice.diceCurrentValue));
     }
-    
-    //NSUInteger total = diceValue1 + diceValue2 + diceValue3 + diceValue4 + diceValue5;
-    ;
     
 }
 
 
--(void)diceValueArrayUpdate:(int)leftOut {
+-(void)diceValueArrayUpdate {
     
+    for (int i=0; i < 5; i++) {
+        
+        Dice *diceU = [self.diceValuesArray objectAtIndex:i];
+        if ([diceU.diceStatus isEqualToString:@"held"]) {
+            NSLog(@"No can do %lu", diceU.diceCurrentValue);
+         //   return;
+        } else {
+        [diceU diceValueRandomiser];
+        //NSLog(@"%lu", diceU.diceCurrentValue);
+        [self.diceValuesArray replaceObjectAtIndex:i withObject:diceU];
+        }
+    }
+}
+
+
+-(void)diceStatusResetUpdate {
     
     for (int i=0; i < 5; i++) {
         
         Dice *diceU = [[Dice alloc] init];
         diceU = [self.diceValuesArray objectAtIndex:i];
-        
-        if ([diceU.diceStatus isEqualToString:@"held"]) {
-            NSLog(@"No can do");
-        } else {
-        
-        [diceU diceValueRandomiser];
-        
-        NSLog(@"%lu", diceU.diceCurrentValue);
-        
+        diceU.diceStatus = @"free";
         [self.diceValuesArray replaceObjectAtIndex:i withObject:diceU];
         
-        //NSLog(@"%@", @(dice.diceCurrentValue));
     }
-    
-    //NSUInteger total = diceValue1 + diceValue2 + diceValue3 + diceValue4 + diceValue5;
-    
+}
+
+-(void)printCurrentDiceArray {
+    int total = 0;
+    NSString *customIndex;
+    for (int i =0; i<5;i++){
+        //Dice *diceDisplay = [[Dice alloc] init];
+        Dice *diceDisplay = [self.diceValuesArray objectAtIndex:i];
+                if (i == 0) {   customIndex = @"a";
+        } else if (i == 1) {    customIndex = @"b";
+        } else if (i == 2) {    customIndex = @"c";
+        } else if (i == 3) {    customIndex = @"d";
+        } else if (i == 4) {    customIndex = @"e";
+        }
+        if ([diceDisplay.diceStatus isEqualToString:@"held"]) {
+            NSLog(@"%@: [\%lu]", customIndex, (unsigned long)diceDisplay.diceCurrentValue);
+        } else {
+        NSLog(@"%@: %lu", customIndex, (unsigned long)diceDisplay.diceCurrentValue);
+        }
+        total = total + diceDisplay.diceCurrentValue;
+    }
+    NSLog(@"Total is %d", total);
     
 }
+
+-(NSString *)statusCheck {
+    int found = 0;
+    int i = 0;
+    for (i = 0; i < 5; i++){
+        
+        Dice *diceDisplay = [self.diceValuesArray objectAtIndex:i];
+        if ([diceDisplay.diceStatus isEqualToString:@"held"]) {
+            found = found + 1;
+        }
+    }
+    if (found == 5) {
+        return @"complete";
+    } else {
+        return @"notcomplete";
+    }
 }
-//-(void)diceValueDisplay {
-//
-//for (int i = 0;i < 5 ; i++) {
-//    
-//    Dice *dice = [[Dice alloc] init];
-//    dice = [self.diceValuesArray objectAtIndex:(i)];
-//    NSLog(@"%lu", (unsigned long)dice.diceValue);
-//    
-//}
-//
-//}
+
+
+
+
+
+
+
 
 @end

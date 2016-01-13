@@ -16,8 +16,13 @@
 
 -(void)diceValueArrayCreation;
 
--(void)diceValueArrayUpdate:(int)leftOut;
+-(void)diceValueArrayUpdate;
 
+-(void)diceStatusResetUpdate;
+
+-(void)printCurrentDiceArray;
+
+-(NSString *)statusCheck;
 //-(void)diceValueDisplay;
 
 @end
