@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		482B849A1C46AE7200611EA0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 482B84991C46AE7200611EA0 /* main.m */; };
+		482B84A21C46AE8A00611EA0 /* Dice.m in Sources */ = {isa = PBXBuildFile; fileRef = 482B84A11C46AE8A00611EA0 /* Dice.m */; };
+		482B84A51C46B68C00611EA0 /* InputCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 482B84A41C46B68C00611EA0 /* InputCollector.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,10 @@
 /* Begin PBXFileReference section */
 		482B84961C46AE7200611EA0 /* ThreeLow */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ThreeLow; sourceTree = BUILT_PRODUCTS_DIR; };
 		482B84991C46AE7200611EA0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		482B84A01C46AE8A00611EA0 /* Dice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dice.h; sourceTree = "<group>"; };
+		482B84A11C46AE8A00611EA0 /* Dice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dice.m; sourceTree = "<group>"; };
+		482B84A31C46B68C00611EA0 /* InputCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputCollector.h; sourceTree = "<group>"; };
+		482B84A41C46B68C00611EA0 /* InputCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputCollector.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,10 @@
 			isa = PBXGroup;
 			children = (
 				482B84991C46AE7200611EA0 /* main.m */,
+				482B84A31C46B68C00611EA0 /* InputCollector.h */,
+				482B84A41C46B68C00611EA0 /* InputCollector.m */,
+				482B84A01C46AE8A00611EA0 /* Dice.h */,
+				482B84A11C46AE8A00611EA0 /* Dice.m */,
 			);
 			path = ThreeLow;
 			sourceTree = "<group>";
@@ -118,6 +128,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				482B84A51C46B68C00611EA0 /* InputCollector.m in Sources */,
+				482B84A21C46AE8A00611EA0 /* Dice.m in Sources */,
 				482B849A1C46AE7200611EA0 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
