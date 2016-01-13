@@ -40,8 +40,8 @@
         
         Dice *diceU = [self.diceValuesArray objectAtIndex:i];
         if ([diceU.diceStatus isEqualToString:@"held"]) {
-            NSLog(@"No can do %lu", diceU.diceCurrentValue);
-         //   return;
+            //  NSLog(@"No can do %lu", diceU.diceCurrentValue);
+            //  return;
         } else {
         [diceU diceValueRandomiser];
         //NSLog(@"%lu", diceU.diceCurrentValue);
@@ -64,7 +64,7 @@
 }
 
 -(void)printCurrentDiceArray {
-    int total = 0;
+    self.totalScore = 0;
     NSString *customIndex;
     for (int i =0; i<5;i++){
         //Dice *diceDisplay = [[Dice alloc] init];
@@ -80,11 +80,21 @@
         } else {
         NSLog(@"%@: %lu", customIndex, (unsigned long)diceDisplay.diceCurrentValue);
         }
-        total = total + diceDisplay.diceCurrentValue;
+        self.totalScore = self.totalScore + diceDisplay.diceCurrentValue;
     }
-    NSLog(@"Total is %d", total);
+    NSLog(@"Total is %lu", (unsigned long)self.totalScore);
     
 }
+
+-(NSUInteger)totalScorePlayer {
+    self.totalScore = 0;
+    for (int i =0; i<5;i++){
+        Dice *diceDisplay = [self.diceValuesArray objectAtIndex:i];
+        self.totalScore = self.totalScore + diceDisplay.diceCurrentValue;
+    }
+    return self.totalScore;
+}
+
 
 -(NSString *)statusCheck {
     int found = 0;
