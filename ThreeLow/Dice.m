@@ -27,7 +27,4 @@
     self.diceStatus = @"held";
 }
 
-
-
-
 @end

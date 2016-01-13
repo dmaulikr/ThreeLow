@@ -14,8 +14,6 @@
 
 @property (nonatomic) NSUInteger totalScore;
 
-//@property (nonatomic, strong) NSMutableArray *heldValuesArray;
-
 -(void)diceValueArrayCreation;
 
 -(void)diceValueArrayUpdate;
@@ -27,6 +25,6 @@
 -(NSString *)statusCheck;
 
 -(NSUInteger)totalScorePlayer;
-//-(void)diceValueDisplay;
+
 
 @end

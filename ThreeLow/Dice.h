@@ -14,8 +14,6 @@
 
 @property (nonatomic, assign) NSString *diceStatus;
 
-//@property (nonatomic, strong) NSMutableArray *diceValuesArray;
-
 -(void)diceValueRandomiser;
 
 -(void)diceHold;
