@@ -8,7 +8,7 @@
 
 #import "InputCollector.h"
 
-@implementation InputCollector
+@implementation InputCollector                                              // Used to take in input from user
 
 -(NSString *)inputForPrompt:(NSString *)promptString {
     char inputChoice[255];

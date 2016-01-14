@@ -9,61 +9,51 @@
 #import "GameController.h"
 #import "Dice.h"
 
-@implementation GameController
+@implementation GameController                                  // Initializes the dice array
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
         _diceValuesArray = [[NSMutableArray alloc] init];
-        //[self diceValueArrayCreation];
     }
     return self;
 }
 
--(void)diceValueArrayCreation {
+-(void)diceValueArrayCreation {                                 // Populates the dice array with first elements
     
     for (int i=0; i <5; i++) {
-        
         Dice *dice = [[Dice alloc] init];
         [dice diceValueRandomiser];
-        //NSLog(@"%lu", dice.diceCurrentValue);
         [self.diceValuesArray addObject:dice];
     }
-    
 }
 
 
--(void)diceValueArrayUpdate {
+-(void)diceValueArrayUpdate {                                   // Changes dice values for status not held
     
     for (int i=0; i < 5; i++) {
-        
         Dice *diceU = [self.diceValuesArray objectAtIndex:i];
         if ([diceU.diceStatus isEqualToString:@"held"]) {
-            //  NSLog(@"No can do %lu", diceU.diceCurrentValue);
-            //  return;
         } else {
         [diceU diceValueRandomiser];
-        //NSLog(@"%lu", diceU.diceCurrentValue);
         [self.diceValuesArray replaceObjectAtIndex:i withObject:diceU];
         }
     }
 }
 
 
--(void)diceStatusResetUpdate {
+-(void)diceStatusResetUpdate {                                  // Resets all locks so that next update-method-call will change all 5 element values
     
     for (int i=0; i < 5; i++) {
-        
-        Dice *diceU = [[Dice alloc] init];
-        diceU = [self.diceValuesArray objectAtIndex:i];
+        Dice *diceU = [self.diceValuesArray objectAtIndex:i];
         diceU.diceStatus = @"free";
         [self.diceValuesArray replaceObjectAtIndex:i withObject:diceU];
         
     }
 }
 
--(void)printCurrentDiceArray {
+-(void)printCurrentDiceArray {                                  // Prints the values of all array elements with their statuses
     self.totalScore = 0;
     NSString *customIndex;
     for (int i =0; i<5;i++){
@@ -78,15 +68,14 @@
         if ([diceDisplay.diceStatus isEqualToString:@"held"]) {
             NSLog(@"%@: [\%lu]", customIndex, (unsigned long)diceDisplay.diceCurrentValue);
         } else {
-        NSLog(@"%@: %lu", customIndex, (unsigned long)diceDisplay.diceCurrentValue);
+            NSLog(@"%@: %lu", customIndex, (unsigned long)diceDisplay.diceCurrentValue);
         }
         self.totalScore = self.totalScore + diceDisplay.diceCurrentValue;
     }
     NSLog(@"Total is %lu", (unsigned long)self.totalScore);
-    
 }
 
--(NSUInteger)totalScorePlayer {
+-(NSUInteger)totalScorePlayer {                                 // Returns the total score of each playery
     self.totalScore = 0;
     for (int i =0; i<5;i++){
         Dice *diceDisplay = [self.diceValuesArray objectAtIndex:i];
@@ -96,11 +85,10 @@
 }
 
 
--(NSString *)statusCheck {
+-(NSString *)statusCheck {                                      // Provides the status of dice array
     int found = 0;
     int i = 0;
     for (i = 0; i < 5; i++){
-        
         Dice *diceDisplay = [self.diceValuesArray objectAtIndex:i];
         if ([diceDisplay.diceStatus isEqualToString:@"held"]) {
             found = found + 1;
